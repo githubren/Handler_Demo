@@ -50,38 +50,31 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.start_btn:
-                new Thread(new Runnable() {
-                    @Override
-                    public void run() {
-                        for (int i = TIME;i>-1;i--){
-//                            mHandler.sendMessage(mHandler.obtainMessage(TIME_START_ACTION,i));
+                new Thread(() -> {
+//                    for (int i = TIME;i>-1;i--){
+////                            mHandler.sendMessage(mHandler.obtainMessage(TIME_START_ACTION,i));
 //                            Message message = new Message();
 //                            message.obj = i;
 //                            message.what = TIME_START_ACTION;
 //                            mHandler.sendMessage(message);
-                            mHandler.sendEmptyMessage(TIME_START_ACTION);
-//                            mHandler.obtainMessage(TIME_START_ACTION,i).sendToTarget();
+//                        mHandler.sendEmptyMessage(TIME_START_ACTION);
+////                            mHandler.obtainMessage(TIME_START_ACTION,i).sendToTarget();
+//                        try {
+//                            Thread.sleep(1000);
+//                        } catch (InterruptedException e) {
+//                            e.printStackTrace();
+//                        }
+//                    }
+                        for (int i = 60;i>0;i--){
                             try {
                                 Thread.sleep(1000);
                             } catch (InterruptedException e) {
                                 e.printStackTrace();
                             }
+                            mHandler.post(() -> mTimeText.setText(String.valueOf(--TIME)));
                         }
-//                        for (int i = 60;i>0;i--){
-//                            try {
-//                                Thread.sleep(1000);
-//                            } catch (InterruptedException e) {
-//                                e.printStackTrace();
-//                            }
-//                            mHandler.post(new Runnable() {
-//                                @Override
-//                                public void run() {
-//                                    mTimeText.setText(String.valueOf(--TIME));
-//                                }
-//                            });
-//                        }
-                    }
                 }).start();
+
                 break;
         }
     }
